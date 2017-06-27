@@ -1,0 +1,12 @@
+---
+
+- hosts: servers
+  remote_user: root
+  gather_facts: no
+  vars_files:
+    - varfile.yml
+  roles:
+    - pv
+    - vg
+    - lv
+    - mount

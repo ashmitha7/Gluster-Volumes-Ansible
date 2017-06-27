@@ -1,0 +1,4 @@
+---
+- name: Create a logical volume
+  shell: "lvcreate -l {{size}} -n {{logicalvol}} {{volgroup}} {{pvlocation}}"
+

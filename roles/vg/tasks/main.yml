@@ -1,0 +1,4 @@
+---
+- name: Create a volume group
+  shell: vgcreate {{volgroup}} {{pvlocation}}
+

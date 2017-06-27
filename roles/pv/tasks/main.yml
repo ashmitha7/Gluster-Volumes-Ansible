@@ -1,0 +1,5 @@
+---
+- name: Create a physical volume
+  shell: "pvcreate {{pvlocation}}"
+
+

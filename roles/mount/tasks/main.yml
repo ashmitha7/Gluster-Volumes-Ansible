@@ -1,0 +1,13 @@
+---
+- name: Create the backend disks, skips if present
+  file: path=/mnt/brick1/b1
+        state=directory
+
+- name: Create the backend disks, skips if present
+  shell: mkfs.xfs -i size=512 /dev/volgrp1/logicalvol1
+
+- name: Mount the volumes
+  mount: path=/mnt/brick1/b1
+         src=/dev/volgrp1/logicalvol1
+         fstype=xfs
+         state=present

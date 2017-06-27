@@ -1,0 +1,12 @@
+---
+#variables used in creating pv,vg and lv
+
+pvlocation: /dev/vdb
+volgroup: volgrp1
+logicalvol: logicalvol1
+size: 20
+dalign: 1280K
+physicalextentsize: 128K
+
+
+...
