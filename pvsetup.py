@@ -52,7 +52,5 @@ def main():
     os.system("ansible-playbook -i host.ini " + new_playbook.name)
 
 
-    import pdb; pdb.set_trace()
-
 if __name__ == '__main__':
     main()
