@@ -25,3 +25,6 @@ playbook that initializes all the variables.
 
 ### host.ini     
 Host file.
+
+### pvsetup.py
+The python file takes input from the user and creates a new temporary playbook by filling out the variables inclosed in the Jinja expression and finally executes the playbooks to create a PV,VG,Lv and mount the volumes. 
