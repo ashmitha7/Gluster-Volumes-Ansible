@@ -3,7 +3,7 @@
 To create physical volumes, volume group and logical volumes and mount them using ansible playbooks on remote hosts. And then creating Ansible roles and achieving the same results. 
 
 Also, I have written a python file. 
-The python file takes inputs from the user and returns the value of the variables to the yml files and then the yml files run to create PV,VG,LV and mount the volumes.
+The python file takes input from the user and creates a new temporary playbook by filling out the variables inclosed in the Jinja expression and finally executes the playbooks to create a PV,VG,Lv and mount the volumes.
 
 ### pvcreate.yml 
 playbook to create a physical volume.
