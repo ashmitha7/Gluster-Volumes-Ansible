@@ -2,7 +2,10 @@
 - hosts: servers
   remote_user: root
   gather_facts: no
-  
+  vars_files: 
+   - varfile.yml
+
   tasks:
     - name: Create a physical volume
-      shell: "pvcreate {{dalign}} {{pvlocation}}"
+      shell: "pvcreate 256 /dev/vdb"
+

@@ -2,12 +2,11 @@
 - hosts: servers
   remote_user: root
   gather_facts: no
-  vars_files: 
-   - varfile.yml
-
-
+  vars_files:
+    - ./roles/lv/vars/varfile.yml
   tasks:
+    - name: Create thin pool
+      shell: "lvcreate --thin {{volgroup}}/{{poolname}} --size {{poolsize}} --chunksize {{chunksize}} --poolmetadatasize {{metasize}}"
+
     - name: Create a logical volume
-      shell: "lvcreate -l {{size}} -n {{logicalvol}} {{volgroup}} {{pvlocation}} {{physicalextentsize}} "
-
-
+      shell: "lvcreate --thin --name {{lv_name}} --virtualsize {[lv_size}} {{volgroup}}/{{thin_pool}}"

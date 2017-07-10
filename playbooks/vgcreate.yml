@@ -2,12 +2,10 @@
 - hosts: servers
   remote_user: root
   gather_facts: no
-  vars_files: 
-   - varfile.yml
 
   tasks:
     - name: Create a volume group
-      shell: vgcreate {{diskcount}} {{disktype}} {{stripesize}} {{dalign}} {{volgroup}} {{pvlocation}}
-      
+      shell: vgcreate {{extent_size}} {{volgroup}} {{pvlocation}}
+
 
 ...

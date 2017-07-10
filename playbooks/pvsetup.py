@@ -2,10 +2,25 @@ import os
 import json
 from ast import literal_eval
 from tempfile import NamedTemporaryFile
+import argparse
 
 from ansible.playbook import Playbook
 from ansible.module_utils.basic import *
 import jinja2
+import yaml
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--type", '-t',
+                    required=True,
+                    help="disk type is required",
+                    choices=["JBOD", "RAID6", "RAID10"])
+
+parser.add_argument("--pvlocation", '-p')
+parser.add_argument("--size", '-s')
+parser.add_argument("--number_of_disks", '-n')
+
+
 
 class PhysicalVolCreate(object):
 
@@ -27,32 +42,28 @@ class PhysicalVolCreate(object):
 
 
 def main():
-    type = raw_input("Enter the value of data alignment : ")
+    args = parser.parse_args()
+    type = args.type
     if type == 'JBOD':
         data_align = PhysicalVolCreate().data_align(type)
     else:
-        number_of_disks = input("Enter the number of disks :")
-        size = raw_input("Enter the size : ")
+        number_of_disks = args.number_of_disks
+        size = args.size
         data_align = PhysicalVolCreate().data_align(type, number_of_disks, size)
 
-    pvlocation = raw_input("Enter the physical volume location : ")
+    pvlocation = args.pvlocation
 
-    playbook = open('pvcreate.yml','r+')
-    playbook_template = jinja2.Template(playbook.read())
-
-    rendered_template = playbook_template.render({
-        'pvlocation': pvlocation,
-        'dalign': data_align
-})
-    new_playbook =  open('./tmp.yml', 'w+')
-    new_playbook.write(rendered_template)
-    new_playbook.write('\n')
-    new_playbook.close()
-
-    os.system("ansible-playbook -i host.ini " + new_playbook.name)
+    vars = {
+        "pvlocation": args.pvlocation,
+        "dalign": data_align
+    }
 
 
-    import pdb; pdb.set_trace()
+    with open('./roles/pv/vars/main.yml', 'w+') as varfile:
+        yaml.dump(vars, varfile, default_flow_style=False)
+
+    os.system("ansible-playbook -i host.ini " + ' playbooks/play.yml')
+
 
 if __name__ == '__main__':
     main()

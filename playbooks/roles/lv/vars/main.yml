@@ -1,0 +1,4 @@
+lvname: logicalvolumeb
+pvlocation: /dev/vd
+size: 256
+volgroup: volgrp
