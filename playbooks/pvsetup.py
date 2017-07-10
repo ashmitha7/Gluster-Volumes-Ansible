@@ -64,6 +64,9 @@ def main():
 
     os.system("ansible-playbook -i host.ini " + ' playbooks/play.yml')
 
+<<<<<<< HEAD:playbooks/pvsetup.py
 
+=======
+>>>>>>> 7b18b6150c07465e013534302e8ccef9a01c8914:pvsetup.py
 if __name__ == '__main__':
     main()
